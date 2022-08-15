@@ -2,7 +2,7 @@
 .card-body,
 .container,
 .site-header {
-  font-family: 'Raleway', serif !important;
+  font-family: "Raleway", serif !important;
 }
 
 .jumbotron .display-4 {
@@ -32,8 +32,8 @@ nav a {
   height: 50vh;
   padding: 5em inherit;
   margin-bottom: 0;
-  background-color: #53C0FB;
-  background: url('../img/cover_back.png');
+  background-color: #53c0fb;
+  background: url("../img/cover_back.png");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -73,12 +73,12 @@ footer {
 }
 
 footer p {
-  margin-bottom: .25rem;
+  margin-bottom: 0.25rem;
 }
 
 .site-header a {
   color: white;
-  transition: ease-in-out color .15s;
+  transition: ease-in-out color 0.15s;
 }
 
 .site-header .dropdown-menu a {
@@ -86,7 +86,7 @@ footer p {
 }
 
 .dropzone {
-  border: 2px dashed #0087F7;
+  border: 2px dashed #0087f7;
   border-radius: 5px;
   background: white;
 }
@@ -187,4 +187,92 @@ a.custom-card:hover {
 
 .checked {
   color: orange;
+}
+/* .mb-1 {
+  text-align: right;
+}
+#img-product {
+  width: 500px;
+  height: 400px;
+}
+form {
+  margin: auto;
+  margin-top: 5%;
+  width: 40%;
+}
+.mb-4 {
+} */
+
+.form-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background-image: linear-gradient(
+    315deg,
+    #eceef4 0,
+    #ced5e3 50%,
+    #b1bcd2 100%
+  );
+  /* background: linear-gradient(to top, #66ccff 0%, #ccffff 100%); */
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: sans-serif;
+}
+
+.simul-form {
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  text-align: center;
+  padding: 20px 25px;
+  box-shadow: 0 5px 10px rgba(71, 3, 6, 0.7);
+}
+
+.simul-form .title {
+  color: #252525;
+  font-size: 35px;
+  font-weight: 800;
+  margin-bottom: 30px;
+}
+
+.simul-form label {
+  margin-bottom: 35px;
+}
+
+.simul-form label .fa-solid {
+  font-size: 20px;
+  color: #cb232c;
+  margin-right: 10px;
+}
+
+.simul-formlabel input {
+  outline: none;
+  border: none;
+  color: #252525;
+  border-bottom: solid 1px #ce1d61;
+  padding: 0 5px;
+  font-size: 18px;
+}
+
+.simul-form label input::placeholder {
+  color: rgba(37, 37, 37, 0.5);
+}
+
+.simul-form button {
+  color: #fff;
+  border: none;
+  background: linear-gradient(to right, #cb232c, #ce1d61);
+  padding: 10px 15px;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+#Title-Cars {
+  text-align: center;
+}
+
+#Subtitle-Cars {
+  text-align: center;
 }
