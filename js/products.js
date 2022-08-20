@@ -7,7 +7,7 @@ fetch(link_cars)
     // Creo la variable contenido que va a almacenar todo el contenido HTML a agregar al contenedor
     let contenido = "";
 
-    console.log(datos.products);
+    // console.log(datos.products);
 
     //Itero sobre los productos y voy armando el contenido HTML
     for (let i = 0; i < datos.products.length; i++) {
@@ -32,62 +32,8 @@ fetch(link_cars)
                 </div>
             </div>
             `;
-
-      // `
-      // <div class="list-group-item list-group-item-action">
-      //     <div class="row">
-      //         <div class="col-3">
-      //             <img id="img-product" height: "200" width:"200" src="` + /// estaba el img scr y es src
-      // product.image +
-      // `" alt="" class="">
-      //         </div>
-      //         <div class="col">
-      //             <div class="">
-      //                 <div class="mb-1">
-      //                 <h4>` +
-      // product.name +
-      // `</h4>
-      //                 <p> ` +
-      // product.description + // Falta agregar la "t" en description
-      // `</p>
-      //                 </div>
-      //                 <small class="text-muted">` +
-      // product.soldCount + // estaban cambiados con el category.name
-      // ` artículos</small>
-      //             </div>
-
-      //         </div>
-      //     </div>
-      // </div>
-      // `;
     }
 
     //Agrego el contenido armado anteriormente al contenedor de los productos
     document.getElementById("products-container").innerHTML = contenido;
   });
-
-//   `
-// <div class="img" id="img">
-//     <div class="row">
-//         <div class="">
-//             <img src="` +
-//   product.image +
-//   `" alt="" class="">
-//           </div>
-//           <div class="">
-//               <div class="">
-//                   <div id="title-product">
-//                   <id="" h1>` +
-//   product.name +
-//   `</h4>
-//   <p> ` +
-//   product.description +
-//   `</h4>
-//   <p> ` +
-//   product.currency +
-//   `<p>
-// </p>` +
-//   product.cost +
-//   "<p>Cantidades vendidas: " +
-//   product.soldCount +
-//   "</p>";
