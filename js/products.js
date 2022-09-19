@@ -8,6 +8,8 @@ function initialize() {
   getProductsListAndUpdateHtml();
 }
 
+// Consigna 2, parte b
+
 function getCatIdFromStorage() {
   //Obtengo el catId del storage
   const catId = localStorage.getItem("catID");
@@ -18,6 +20,19 @@ function getCatIdFromStorage() {
     return 101; //categoria por defecto
   }
 }
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// ----------------Parte 1 de la consigna, funcion onclick, coloca el id del producto en LocalStorage -------------///
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+function setProductID(id) {
+  localStorage.setItem("ProductID", id);
+  const prodID = localStorage.getItem("ProductID");
+  if (prodID) {
+    window.location = "product-info.html";
+  } else {
+  }
+}
+///////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////
 
 function getProductsListAndUpdateHtml() {
   let link_cars =
@@ -49,7 +64,7 @@ function updateProductsHtml() {
     //Dentro del if coloco las condiciones para el filtrado
     if (!(product.cost < minPrice) && !(product.cost > maxPrice)) {
       contenido += `
-        <div onclick="setCatID(${product.id})" class="list-group-item list-group-item-action cursor-active" id="div-container">
+        <div onclick="setProductID(${product.id})" class="list-group-item list-group-item-action cursor-active" id="div-container">
             <div class="row">
                 <div class="col-3">
                     <img src="${product.image}" alt="${product.description}" class="img-thumbnail">

@@ -276,3 +276,37 @@ form {
 #Subtitle-Cars {
   text-align: center;
 }
+
+.column {
+  float: left;
+  width: 25%;
+  padding: 5px;
+}
+
+/* Clear floats after image containers */
+.row::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.checked {
+  color: orange;
+}
+
+.testimonios_contenedor {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.testimonios_caja {
+  width: 500px;
+  box-shadow: 2px 2px 30px rgba(0, 0, 0, 0.1);
+  background-color: white;
+  margin: 15px;
+  cursor: pointer;
+  padding: 1px 2px 1px 2px;
+}
