@@ -11,15 +11,26 @@ document.addEventListener("DOMContentLoaded", function obtenerusuario() {
   });
 });
 
+////////////////////////////////////////////////////////////////////////////////
+///////////////----- Entrega 4, parte b--------////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////
+
 document.addEventListener("DOMContentLoaded", function agregarItem() {
   if (localStorage.getItem("usuario")) {
     nombreUsuario_json = localStorage.getItem("usuario");
 
     const usuarioLocalStorage = JSON.parse(nombreUsuario_json);
 
-    document.getElementById("navigator").innerHTML =
-      `<a class="nav-link" href="my-profile.html">` +
+    document.getElementById("navigator").innerHTML +=
+      `<div class="dropdown"> <a class="btn btn-dark dropdown-toggle" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false href="my-profile.html">` +
       usuarioLocalStorage +
-      `</a>`;
+      `</a>
+      <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+    <li><a class="dropdown-item" href="cart.html">Mi Carrito</a></li>
+    <li><a class="dropdown-item" href="my-profile.html">Mi perfil</a></li>
+    <li><a class="dropdown-item" href="index.html">Cerrar sesión</a></li>
+  </ul>
+      
+      </div>`;
   }
 });

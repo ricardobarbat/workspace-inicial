@@ -29,6 +29,14 @@ function getIdProductfromStorage() {
     alert("Usted no ha seleccionado ningún elemento");
   }
 }
+function setProductID(id) {
+  localStorage.setItem("ProductID", id);
+  const prodID = localStorage.getItem("ProductID");
+  if (prodID) {
+    window.location = "product-info.html";
+  } else {
+  }
+}
 ////////////////////////////////////////////////////////////////////////////////
 /////////////////----Parte 3 de la consigna------ //////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////
@@ -41,6 +49,7 @@ function getProductInfoAndUpdate() {
     .then((respuesta) => respuesta.json()) //Aquí ya lo convirtió en un objeto de tipo JS para el Json de la info de cada producto
     .then((data) => {
       products = data;
+      console.log(products.relatedProducts);
       link_comment_products =
         "https://japceibal.github.io/emercado-api/products_comments/" +
         getIdProductfromStorage() +
@@ -285,10 +294,37 @@ function updateInfoHtml() {
           <br />
           <input type="submit" value="Enviar" id="boton-comentario" class="btn btn-info" />
         </div>
-      </div>`;
+      </div>
+      <br />
+      <h4 style="font-weight:bolder;">Productos relacionados</h4>`;
+
+  ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  ///////////////////////-------------Entrega 4, parte a --------------//////////////////////////////////////////
+  /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  let related_products = "";
+  for (let i = 0; i < products.relatedProducts.length; i++) {
+    const product_related = products.relatedProducts[i];
+
+    related_products += `
+    
+         <div onclick="setProductID(${product_related.id})" class="list-group-item list-group-item-action cursor-active" id="div-container">
+  <div class="row">
+      <div class="col-3">
+          <img src="${product_related.image}" class="img-thumbnail">
+      </div>
+      <div class="col">
+          <div class="d-flex w-100 justify-content-between">
+              <h4 class="mb-1">${product_related.name}</h4>
+          </div>
+      </div>
+  </div>
+</div>
+`;
+  }
 
   //Agrego por partes de la estructura html con DOM, en este caso lo hice separado pero pude haber concatenado contenido + comments_html + agregar_comment
   document.getElementById("containerInfoProd").innerHTML = contenido;
   document.getElementById("containerInfoProd").innerHTML += comments_html;
   document.getElementById("containerInfoProd").innerHTML += agregar_comment;
+  document.getElementById("containerInfoProd").innerHTML += related_products;
 }
