@@ -1,4 +1,4 @@
-var products = [];
+var products;
 
 initialize();
 
@@ -49,7 +49,7 @@ function getProductInfoAndUpdate() {
     .then((respuesta) => respuesta.json()) //Aquí ya lo convirtió en un objeto de tipo JS para el Json de la info de cada producto
     .then((data) => {
       products = data;
-      console.log(products.relatedProducts);
+      //console.log(products.relatedProducts);
       link_comment_products =
         "https://japceibal.github.io/emercado-api/products_comments/" +
         getIdProductfromStorage() +
@@ -64,9 +64,14 @@ function getProductInfoAndUpdate() {
 }
 
 function updateInfoHtml() {
+  let buttonBuyer = `
+    <button id="buttonBuyer" type="button" class="btn btn-success pull-right">Comprar</button>
+    <br>
+  `;
+
   let contenido = "";
 
-  contenido += `<div class="row">
+  contenido += `<div class="row mt-3">
    <div class="title-product-info col-5">
   <h1 class="p-3 mb-2 bg-info text-dark display-5">${products.name}</h1>
   <br>
@@ -128,11 +133,11 @@ function updateInfoHtml() {
   ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   let comments_html = "";
   for (let i = 0; i < productComments.length; i++) {
-    const comment = productComments[i];
+    comments_html += generarComentarioHtml(productComments[i]);
+  }
 
-    if (comment.score == 1) {
-      comments_html += `
-      <div class="testimonios_contenedor row">
+  function generarComentarioHtml(comment) {
+    let html = `<div class="testimonios_contenedor row">
         <div class="testimonios_caja col-12">
           <div class="caja_top">
             <div class="perfil">
@@ -141,127 +146,24 @@ function updateInfoHtml() {
                 <span>-${comment.dateTime}</span>
               </div>
             </div>
-            <div class="reseñas">
-              <i class="fas fa-star checked"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-              <i class="fas fa-star"></i>
-            </div>
-          </div>
-          <div class="comentarios_clientes">
-            <p>
-            ${comment.description}
-            </p>
-          </div>
-        </div>
-      </div>
-            `;
-    } else if (comment.score == 2) {
-      comments_html += ` <div class="testimonios_contenedor row">
-      <div class="testimonios_caja col-12">
-        <div class="caja_top">
-          <div class="perfil">
-            <div class="name-user">
-              <strong>${comment.user}</strong>
-              <span>-${comment.dateTime}</span>
-            </div>
-          </div>
-          <div class="reseñas">
-            <i class="fas fa-star checked"></i>
-            <i class="fas fa-star checked"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-          </div>
-        </div>
-        <div class="comentarios_clientes">
-          <p>
-          ${comment.description}
-          </p>
-        </div>
-      </div>
-    </div>
-            `;
-    } else if (comment.score == 3) {
-      comments_html += `<div class="testimonios_contenedor row">
-      <div class="testimonios_caja col-12">
-        <div class="caja_top">
-          <div class="perfil">
-            <div class="name-user">
-              <strong>${comment.user}</strong>
-              <span>-${comment.dateTime}</span>
-            </div>
-          </div>
-          <div class="reseñas">
-            <i class="fas fa-star checked"></i>
-            <i class="fas fa-star checked"></i>
-            <i class="fas fa-star checked"></i>
-            <i class="fas fa-star"></i>
-            <i class="fas fa-star"></i>
-          </div>
-        </div>
-        <div class="comentarios_clientes">
-          <p>
-          ${comment.description}
-          </p>
-        </div>
-      </div>
-    </div>
-            `;
-    } else if (comment.score == 4) {
-      comments_html += `<div class="testimonios_contenedor row">
-      <div class="testimonios_caja col-12">
-        <div class="caja_top">
-          <div class="perfil">
-            <div class="name-user">
-              <strong>${comment.user}</strong>
-              <span>-${comment.dateTime}</span>
-            </div>
-          </div>
-          <div class="reseñas">
-            <i class="fas fa-star checked"></i>
-            <i class="fas fa-star checked"></i>
-            <i class="fas fa-star checked"></i>
-            <i class="fas fa-star checked"></i>
-            <i class="fas fa-star"></i>
-          </div>
-        </div>
-        <div class="comentarios_clientes">
-          <p>
-          ${comment.description}
-          </p>
-        </div>
-      </div>
-    </div>
-            `;
-    } else if (comment.score == 5) {
-      comments_html += `<div class="testimonios_contenedor row">
-      <div class="testimonios_caja col-12">
-        <div class="caja_top">
-          <div class="perfil">
-            <div class="name-user">
-              <strong>${comment.user}</strong>
-              <span>-${comment.dateTime}</span>
-            </div>
-          </div>
-          <div class="reseñas">
-            <i class="fas fa-star checked"></i>
-            <i class="fas fa-star checked"></i>
-            <i class="fas fa-star checked"></i>
-            <i class="fas fa-star checked"></i>
-            <i class="fas fa-star" checked></i>
-          </div>
-        </div>
-        <div class="comentarios_clientes">
-          <p>
-          ${comment.description}
-          </p>
-        </div>
-      </div>
-    </div>
-            `;
+            <div class="reseñas">`;
+    for (i = 1; i <= 5; i++) {
+      let checkedClass = "";
+      if (i <= comment.score) {
+        checkedClass = "checked";
+      }
+      html += `<i class="fas fa-star ${checkedClass}"></i>`;
     }
+    html += `</div>
+        </div>
+        <div class="comentarios_clientes">
+          <p>
+          ${comment.description}
+          </p>
+        </div>
+      </div>
+    </div>`;
+    return html;
   }
   //////////////////////////////////////////////////////////////////////////////////////////////////////
   ///////////////////////------Parte 4 de la consigna ---------////////////////////////////////////////
@@ -323,8 +225,39 @@ function updateInfoHtml() {
   }
 
   //Agrego por partes de la estructura html con DOM, en este caso lo hice separado pero pude haber concatenado contenido + comments_html + agregar_comment
+
   document.getElementById("containerInfoProd").innerHTML = contenido;
+  document.getElementById("containerInfoProd").innerHTML += buttonBuyer;
   document.getElementById("containerInfoProd").innerHTML += comments_html;
   document.getElementById("containerInfoProd").innerHTML += agregar_comment;
   document.getElementById("containerInfoProd").innerHTML += related_products;
+
+  // function agregarProductoAlCarrito(products) {
+  document.getElementById("buttonBuyer").addEventListener("click", function () {
+    let productosEnCarrito = localStorage.getItem("producto");
+    console.log(productosEnCarrito);
+    // if (productoDelStorage.id == products.id) {
+    //   console.log("Este producto ya se encuentra en el carrito");
+    // } else {
+    productosEnCarrito = new Array();
+    productosEnCarrito = {
+      id: products.id,
+      count: 1,
+      name: products.name,
+      unitCost: products.cost,
+      image: `img/prod` + products.id + `_1.jpg`,
+      currency: products.currency,
+    };
+
+    console.log(productosEnCarrito);
+
+    //productosEnCarrito.push(nuevoProductoEnCarrito);
+    //console.log(productosEnCarrito);
+
+    //console.log(nuevoProductoEnLS);
+    localStorage.setItem("producto", JSON.stringify(productosEnCarrito));
+    window.location = "cart.html";
+    //}
+  });
 }
+//}
